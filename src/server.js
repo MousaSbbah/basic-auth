@@ -16,6 +16,7 @@ app.use(cors());
 
 app.use('/',authRouter)
 
+//Rout for test the 500 handler
 app.get('/bad',()=>{
   throw new Error();
 })

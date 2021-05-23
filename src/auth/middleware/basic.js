@@ -5,10 +5,14 @@ const User = require("../models/users.js");
 
 module.exports = async (req, res, next) => {
   try {
+    // get the username and passowrd from the header 
     const encoded = req.headers.authorization.split(" ")[1];
+    //encode 
     const decoded = base64.decode(encoded);
     const [username, password] = decoded.split(":");
+    // check the database
     const user = await User.findOne({ username });
+    
     if (user) {
       const isValid = await bcrypt.compare(password, user.password);
       if (isValid) {
